@@ -5,11 +5,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets;
-    public GameObject[] targets;
+    private int score;
+    public List<GameObject> games;
+    private float spawnrate = 1.0f;
+  
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(SPawnTarget());
     }
 
     // Update is called once per frame
@@ -17,4 +20,15 @@ public class GameManager : MonoBehaviour
     {
         
     }
+    IEnumerator SPawnTarget ()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnrate);
+            int  index = Random.Range(0, targets.Count);
+            Instantiate(targets[index]);
+
+        }
+    }
+
 }
